@@ -37,7 +37,7 @@ bot.onText(/\/start/, msg => {
   };
   bot.sendMessage(msg.chat.id,'Привет, меня зовут Робо Миша. Я помогу тебе с выбором фильма на просмотр. Нажми на один из кнопок.🤖', opts);
 });
-ction find(arr, value) {
+function find(arr, value) {
     for (var i = 0; i < arr.length; i++)
         if (arr[i][0] == value)
             return i;
