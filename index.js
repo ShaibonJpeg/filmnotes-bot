@@ -4,22 +4,30 @@ const bot = new TelegramBot(TOKEN, {polling: true})
 
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://shaibonjpeg:Shaibon2019@telegram-bot-hwhpx.mongodb.net/filmbot";
+const uri = "mongodb+srv://shaibonjpeg:Shaibon2019@telegram-bot-hwhpx.mongodb.net/";
 
 
 
 bot.onText(/\/db (.+)/, (msg, match) => {
 
-  MongoClient.connect(uri, function(err,db) {
-    var collection = db.collection('films')
-    var film = {firstName : `${msg.from.first_name}`, film_name: `${match[1]}`, chat_id: `${msg.chat.id}`};
-    collection.insertOne(film, function(err,result){
+  MongoClient.connect(uri, function(err,client) {
+    const db = client.db('filmbot');
+    // var film = {firstName : `${msg.from.first_name}`, film_name: `${match[1]}`, chat_id: `${msg.chat.id}`};
+    var film = {firstName : "Инсаф"};
+    const collection = db.collection('films');
+    collection.insertOne([{firstName : "Инсаф"},{firstName : "Амир"}], function(err,result){
+
+
+
+
+
+
       if(err){
         console.log(err);
         return;
       }
       console.log(result.ops);
-      db.close();
+      client.close();
     });
   });
 
