@@ -4,18 +4,12 @@ const bot = new TelegramBot(TOKEN, {polling: true});
 var films = [];
 var chat_id = ''
 bot.onText(/\/addfilm (.+)/, (msg, match) => {
-  films.push([match[1],msg.chat.id]);
+  films.push([msg.chat.id,match[1]]);
   msg.sendMessage(msg.chat.id,'Успешно добавили в список просмотра.')
 });
 bot.onText(/\/film/, msg => {
-  for(var i = 0; i < films.lenght,i++)
-  {
-    if(films[i][1]==msg.chat.id)
-    {
-      msg.sendMessage(msg.chat.id,`Я предлагаю вам посмотреть фильм: ${films.shift()}`);
-      break;
-    }
-  }
+  var i = find(films,msg.chat.id);
+  msg.sendMessage(msg.chat.id,`Я предлагаю вам посмотреть фильм: ${films[i][1].shift()}`);
 
 });
 bot.hears('🖥️ Какой фильм посмотреть', msg => {
@@ -51,6 +45,11 @@ bot.on('polling_error', (error) => {
 function selectbd()
 {
 
+}
+function find(arr, value) {
+    for (var i = 0; i < arr.length; i++)
+        if (arr[i][0] == value)
+            return i;
 }
 
 function addBD(fname, uname)
