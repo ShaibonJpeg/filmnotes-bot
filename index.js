@@ -5,8 +5,7 @@ const bot = new TelegramBot(TOKEN, {polling: true})
 const dbName = 'filmbot';
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb://shaibonjpeg:Shaibon2019@cluster0-yn2yo.mongodb.net/test?retryWrites=true&w=majority";
-var server_host = process.env.YOUR_HOST;
-console.log(server_host)
+console.log(process.env.YOUR_HOST)
 // bot.onText(/\/db (.+)/, (msg, match) => {
 bot.on('message', msg => {
   MongoClient.connect(url, function(err, client) {
