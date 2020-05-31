@@ -8,11 +8,11 @@ const uri = "mongodb+srv://shaibonjpeg:Shaibon2019@telegram-bot-hwhpx.mongodb.ne
 
 
 
-bot.command('db', msg => {
+bot.onText(/\/db (.+)/, (msg, match) => {
 
   MongoClient.connect(uri, function(err,db) {
     var collection = db.collection('films')
-    var film = {firstName : `${msg.from.first_name}`};
+    var film = {firstName : `${msg.from.first_name}`, film_name: `${match[1]}`, chat_id: `${msg.chat.id}`};
     collection.insertOne(film, function(err,result){
       if(err){
         console.log(err);
