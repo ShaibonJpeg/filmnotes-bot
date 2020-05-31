@@ -1,31 +1,39 @@
 const TelegramBot = require('node-telegram-bot-api')
 const TOKEN = '1202168944:AAG_B7qkSz2b9rj4Ii97uhzI646cU0Qk0qY'
-const bot = new TelegramBot(TOKEN, {polling: true});
+const bot = new TelegramBot(TOKEN, {
+  polling: {
+    interval: 300,
+    autoStart: true,
+    params: {
+      timeout: 10
+    }
+  }
+});
 var films = [];
 var chat_id = ''
-bot.onText(/\/addfilm (.+)/, (msg, match) => {
+bot.onText(/\/addfilm (.+)/, msg => {
   films.push([msg.chat.id,match[1]]);
   msg.sendMessage(msg.chat.id,'Успешно добавили в список просмотра.')
 });
-bot.onText(/\/film/, function onPhotoText(msg) {
+bot.onText(/\/film/, msg => {
   var i = find(films,msg.chat.id);
   msg.sendMessage(msg.chat.id,`Я предлагаю вам посмотреть фильм: ${films[i][1].shift()}`);
 });
-bot.onText('🖥️ Какой фильм посмотреть', (msg) {
+bot.onText(/\🖥️ Какой фильм посмотреть/, function onPhotoText(msg){
   bot.sendMessage(chat_id,'⏳ Анализирую....')
   setTimeout(() => {
     bot.sendMessage(chat_id,'Не получилось найти. Попробуйте попозже.')
   }, 3000);
 });
 
-bot.onText('⌨️ Добавить фильм', function onPhotoText(msg) {
+bot.onText(/\⌨️ Добавить фильм/, function onPhotoText(msg) {
   chat_id = (msg.chat.id)
   bot.sendMessage(chat_id,'⏳ Загрузка....')
   setTimeout(() => {
     bot.sendMessage(chat_id,'Чтобы добавить в список фильм используйте команду: /addfilm [name]. ❗❗ НА ДАННЫЙ МОМЕНТ ПОДДЕРЖИВАЕТСЯ ТОЛЬКО АНГЛИЙСКИЙ ЯЗЫК. НАЗВАНИЯ ПИШИТЕ НА АНГЛИЙСКОМ ЯЗЫКЕ ❗❗')
   }, 3000);
 });
-bot.onText(/\/start/, function onPhotoText(msg) {
+bot.onText(/\/start/, msg => {
   const opts = {
     reply_to_message_id: msg.message_id,
     reply_markup: JSON.stringify({
@@ -36,13 +44,6 @@ bot.onText(/\/start/, function onPhotoText(msg) {
     })
   };
   bot.sendMessage(msg.chat.id,'Привет, меня зовут Робо Миша. Я помогу тебе с выбором фильма на просмотр. Нажми на один из кнопок.🤖', opts);
-});
-
-bot.on('message', (msg) => {
-  const chatId = msg.chat.id;
-
-  // send a message to the chat acknowledging receipt of their message
-  bot.sendMessage(chatId, 'Received your message');
 });
 
 function find(arr, value) {
