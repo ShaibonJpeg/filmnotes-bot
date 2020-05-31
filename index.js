@@ -15,7 +15,7 @@ bot.onText(/\/db (.+)/, (msg, match) => {
     // var film = {firstName : `${msg.from.first_name}`, film_name: `${match[1]}`, chat_id: `${msg.chat.id}`};
     var film = {firstName : "Инсаф"};
     const collection = db.collection('films');
-    collection.insertOne([{firstName : "Инсаф"},{firstName : "Амир"}], function(err,result){
+    collection.insertOne({"firstName" : "Инсаф"}, function(err,result){
 
 
 
