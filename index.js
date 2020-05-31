@@ -6,7 +6,6 @@ const dbName = 'filmbot';
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb://shaibonjpeg:Shaibon2019@cluster0-yn2yo.mongodb.net/test?retryWrites=true&w=majority";
 
-startPolling()
 
 bot.onText(/\/db (.+)/, (msg, match) => {
 
