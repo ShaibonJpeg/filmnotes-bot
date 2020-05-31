@@ -10,7 +10,7 @@ const bot = new TelegramBot(TOKEN, {
   }
 });
 var films = [];
-bot.onText(/\/addfilm (.+)/, msg => {
+bot.onText(/\/addfilm (.+)/, (msg,match) => {
   films.push([msg.chat.id,match[1]]);
   bot.sendMessage(msg.chat.id,'Успешно добавили в список просмотра.')
 });
