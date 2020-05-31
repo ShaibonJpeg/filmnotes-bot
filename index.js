@@ -24,7 +24,7 @@ bot.onText(/\🖥️ Какой фильм посмотреть/, function onPho
     bot.sendMessage(msg.chat.id,'Не получилось найти. Попробуйте попозже.')
   }, 3000);
 });
-
+console.log(films);
 bot.onText(/\⌨️ Добавить фильм/, function onPhotoText(msg) {
   bot.sendMessage(msg.chat.id,'⏳ Загрузка....')
   setTimeout(() => {
