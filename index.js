@@ -10,16 +10,15 @@ bot.onText(/\/addfilm (.+)/, (msg, match) => {
 bot.onText(/\/film/, msg => {
   var i = find(films,msg.chat.id);
   msg.sendMessage(msg.chat.id,`Я предлагаю вам посмотреть фильм: ${films[i][1].shift()}`);
-
 });
-bot.hears('🖥️ Какой фильм посмотреть', msg => {
+bot.onText('🖥️ Какой фильм посмотреть', msg => {
   bot.sendMessage(chat_id,'⏳ Анализирую....')
   setTimeout(() => {
     bot.sendMessage(chat_id,'Не получилось найти. Попробуйте попозже.')
   }, 3000);
 });
 
-bot.hears('⌨️ Добавить фильм', (msg) => {
+bot.onText('⌨️ Добавить фильм', msg => {
   chat_id = (msg.chat.id)
   bot.sendMessage(chat_id,'⏳ Загрузка....')
   setTimeout(() => {
