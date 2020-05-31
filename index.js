@@ -17,7 +17,7 @@ bot.onText(/\/addfilm (.+)/, (msg,match) => {
 });
 bot.onText(/\/film/, msg => {
   var randfilm = films[Math.floor(Math.random() * films.length)];
-  bot.sendMessage(msg.chat.id,`Я предлагаю вам посмотреть фильм: ${randfilm}`);
+  bot.sendMessage(msg.chat.id,`Я предлагаю вам посмотреть фильм: ${randfilm} and ${films}`);
 });
 bot.onText(/\🖥️ Какой фильм посмотреть/, function onPhotoText(msg){
   bot.sendMessage(msg.chat.id,'⏳ Анализирую....')
