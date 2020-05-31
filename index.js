@@ -15,8 +15,8 @@ bot.onText(/\/addfilm (.+)/, (msg,match) => {
   bot.sendMessage(msg.chat.id,'Успешно добавили в список просмотра.');
 });
 bot.onText(/\/film/, msg => {
-  let randfilm = films[Math.floor(Math.random() * films.length)];
-  bot.sendMessage(msg.chat.id,`Я предлагаю вам посмотреть фильм:`, randfilm);
+  var randfilm = films[Math.floor(Math.random() * films.length)];
+  bot.sendMessage(msg.chat.id,`Я предлагаю вам посмотреть фильм: ${randfilm}`);
 });
 bot.onText(/\🖥️ Какой фильм посмотреть/, function onPhotoText(msg){
   bot.sendMessage(msg.chat.id,'⏳ Анализирую....')
