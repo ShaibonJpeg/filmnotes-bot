@@ -7,7 +7,7 @@ bot.onText(/\/addfilm (.+)/, (msg, match) => {
   films.push([msg.chat.id,match[1]]);
   msg.sendMessage(msg.chat.id,'Успешно добавили в список просмотра.')
 });
-bot.onText(/\/film/, (msg) => {
+bot.onText(/\/film/, function onPhotoText(msg) => {
   var i = find(films,msg.chat.id);
   msg.sendMessage(msg.chat.id,`Я предлагаю вам посмотреть фильм: ${films[i][1].shift()}`);
 });
@@ -18,7 +18,7 @@ bot.onText('🖥️ Какой фильм посмотреть', (msg) => {
   }, 3000);
 });
 
-bot.onText('⌨️ Добавить фильм', (msg) => {
+bot.onText('⌨️ Добавить фильм', function onPhotoText(msg) => {
   chat_id = (msg.chat.id)
   bot.sendMessage(chat_id,'⏳ Загрузка....')
   setTimeout(() => {
