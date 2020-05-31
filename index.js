@@ -11,12 +11,11 @@ const bot = new TelegramBot(TOKEN, {
 });
 var films = [];
 bot.onText(/\/addfilm (.+)/, (msg,match) => {
-  films.push([msg.chat.id,match[1]]);
-  bot.sendMessage(msg.chat.id,'Успешно добавили в список просмотра.',films.push([msg.chat.id,match[1]]))
+  films.push(match[1]);
+  bot.sendMessage(msg.chat.id,'Успешно добавили в список просмотра.');
 });
 bot.onText(/\/film/, msg => {
-  var i = find(films,msg.chat.id);
-  bot.sendMessage(msg.chat.id,`Я предлагаю вам посмотреть фильм: ${films}`);
+  bot.sendMessage(msg.chat.id,`Я предлагаю вам посмотреть фильм:`, films[Math.floor(Math.random() * (films.lenght-1))]);
 });
 bot.onText(/\🖥️ Какой фильм посмотреть/, function onPhotoText(msg){
   bot.sendMessage(msg.chat.id,'⏳ Анализирую....')
@@ -42,9 +41,3 @@ bot.onText(/\/start/, msg => {
   };
   bot.sendMessage(msg.chat.id,'Привет, меня зовут Робо Миша. Я помогу тебе с выбором фильма на просмотр. Нажми на один из кнопок.🤖', opts);
 });
-
-function find(arr, value) {
-    for (var i = 0; i < arr.length; i++)
-        if (arr[i][0] == value)
-            return i;
-}
