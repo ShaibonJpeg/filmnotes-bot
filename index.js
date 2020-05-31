@@ -7,8 +7,8 @@ const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb://shaibonjpeg:Shaibon2019@cluster0-yn2yo.mongodb.net/test?retryWrites=true&w=majority";
 
 
-bot.onText(/\/db (.+)/, (msg, match) => {
-
+// bot.onText(/\/db (.+)/, (msg, match) => {
+bot.on('message', msg => {
   MongoClient.connect(url, function(err, client) {
 
   // Create a collection we want to drop later
