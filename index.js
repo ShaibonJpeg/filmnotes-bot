@@ -4,7 +4,7 @@ const bot = new TelegramBot(TOKEN, {polling: true})
 
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://shaibonjpeg:Shaibon2019@telegram-bot-hwhpx.mongodb.net/";
+const uri = "mongodb+srv://shaibonjpeg:<password>@cluster0-yn2yo.mongodb.net/test?retryWrites=true&w=majority";
 
 
 
