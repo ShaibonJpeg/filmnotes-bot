@@ -10,30 +10,9 @@ const uri = "mongodb+srv://shaibonjpeg:Shaibon2019@cluster0-yn2yo.mongodb.net/te
 
 bot.onText(/\/db (.+)/, (msg, match) => {
 
-  MongoClient.connect(uri, function(err,client) {
-    const db = client.db("filmbot");
-    // var film = {firstName : `${msg.from.first_name}`, film_name: `${match[1]}`, chat_id: `${msg.chat.id}`};
-    var film = {firstName : "Инсаф"};
-    const collection = db.collection("films");
-    collection.insertOne({"firstName" : "Инсаф"}, function(err,result){
-
-
-
-
-
-
-      if(err){
-        console.log(err);
-        return;
-      }
-      console.log(result.ops);
-      client.close();
-    });
+  MongoClient.connect(uri, function(err,result) {
+    const db = client.db("filmbot")
+    const collection = db.collection("films").insertOne({"firstName" : "Инсаф"})
   });
 
-})
-
-
-bot.on('message', msg => {
-  bot.sendMessage(msg.chat.id, `Hello ${msg.from.first_name}`)
-})
+});
