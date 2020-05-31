@@ -10,14 +10,13 @@ const bot = new TelegramBot(TOKEN, {
   }
 });
 var films = [];
-var chat_id = ''
 bot.onText(/\/addfilm (.+)/, msg => {
   films.push([msg.chat.id,match[1]]);
-  msg.sendMessage(msg.chat.id,'Успешно добавили в список просмотра.')
+  bot.sendMessage(msg.chat.id,'Успешно добавили в список просмотра.')
 });
 bot.onText(/\/film/, msg => {
   var i = find(films,msg.chat.id);
-  msg.sendMessage(msg.chat.id,`Я предлагаю вам посмотреть фильм: ${films[i][1].shift()}`);
+  bot.sendMessage(msg.chat.id,`Я предлагаю вам посмотреть фильм: ${films[i][1].shift()}`);
 });
 bot.onText(/\🖥️ Какой фильм посмотреть/, function onPhotoText(msg){
   bot.sendMessage(chat_id,'⏳ Анализирую....')
@@ -35,7 +34,6 @@ bot.onText(/\⌨️ Добавить фильм/, function onPhotoText(msg) {
 });
 bot.onText(/\/start/, msg => {
   const opts = {
-    reply_to_message_id: msg.message_id,
     reply_markup: JSON.stringify({
       keyboard: [
         ['🖥️ Какой фильм посмотреть'],
