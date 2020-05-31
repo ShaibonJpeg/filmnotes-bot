@@ -3,7 +3,7 @@ const TOKEN = '1202168944:AAG_B7qkSz2b9rj4Ii97uhzI646cU0Qk0qY'
 const bot = new TelegramBot(TOKEN, {polling: true});
 var films = [];
 var chat_id = ''
-bot.onText(/\/addfilm (.+)/, (msg, match) {
+bot.onText(/\/addfilm (.+)/, (msg, match) => {
   films.push([msg.chat.id,match[1]]);
   msg.sendMessage(msg.chat.id,'Успешно добавили в список просмотра.')
 });
