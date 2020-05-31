@@ -12,7 +12,7 @@ const bot = new TelegramBot(TOKEN, {
 var films = [];
 bot.onText(/\/addfilm (.+)/, (msg,match) => {
   films.push([msg.chat.id,match[1]]);
-  bot.sendMessage(msg.chat.id,'Успешно добавили в список просмотра.')
+  bot.sendMessage(msg.chat.id,'Успешно добавили в список просмотра.',films.push([msg.chat.id,match[1]]))
 });
 bot.onText(/\/film/, msg => {
   var i = find(films,msg.chat.id);
